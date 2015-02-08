@@ -9,6 +9,7 @@ import util.ImageUtil;
 import BryceImages.Operations.Ditherer;
 import BryceImages.Operations.ImageFactory;
 import BryceMath.Calculations.Colors;
+import Data_Structures.Structures.HashingClasses.AArray;
 
 /*
  * A lenticular animation by Bryce Summers.
@@ -30,8 +31,9 @@ public class Lenticular
 	private int index;
 	
 	final static int frames = 10;
+	
 	// Must be of the form x*4 + 2, where x : [0, inf)
-	final int path_density = 1*4 + 2;
+	final int path_density = 2*2*2*2;
 	
 	public static void main(String[] args)
 	{
@@ -45,18 +47,22 @@ public class Lenticular
 	// Upper left, upper right, bottom left, bottom right;
 	private enum Location {UL, UR, BL, BR};
 	
+
+	
 	public Lenticular(int dimension, int index)
 	{
 		this.index = index;
 		
-		BufferedImage output = ImageFactory.blank(dimension, dimension);
-		g = output.getGraphics();
+
 		
 		
-		int path_length = path_density*path_density;
+		int path_length = path_density*path_density/4;
 		
 		int SIZE = dimension/path_density;
 		
+		
+		BufferedImage output = ImageFactory.blank(dimension, dimension);
+		g = output.getGraphics();
 		images = new BufferedImage[frames];
 		
 		for(int i = 0; i < frames; i++)
